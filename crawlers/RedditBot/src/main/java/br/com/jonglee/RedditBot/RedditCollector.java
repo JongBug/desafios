@@ -1,5 +1,7 @@
 package br.com.jonglee.RedditBot;
 
+import java.util.ArrayList;
+
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlDivision;
@@ -13,33 +15,51 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
  */
 public class RedditCollector {
 
-	public void collectData() {
+	public ArrayList<DataReddit> collectData(String subreddit) {
+		ArrayList<DataReddit> redditList = new ArrayList<>();
+		
 		try (final WebClient webClient = new WebClient()) {
-			final HtmlPage page = webClient.getPage("https://www.reddit.com/r/brasil/");
-			webClient.waitForBackgroundJavaScript(10 * 1000);
+			String redditUrl = "https://www.reddit.com/";
+			String url = redditUrl + "r/" + subreddit;
 			
-			RedditCollector data = new RedditCollector();
+			webClient.getOptions().setCssEnabled(false);//if you don't need css
+			webClient.getOptions().setJavaScriptEnabled(false);//if you don't need js
+			final HtmlPage page = webClient.getPage(url);
+			webClient.waitForBackgroundJavaScript(10 * 1000);			
 			
 			// get all threads in Subreddits
 			int divLen = page.getByXPath("//div[@data-score]").size();
 			for (int i = 0; i < divLen; i++) {
-				if (5000 < Integer.parseInt(
-						((HtmlDivision) page.getByXPath("//div[@data-score]").get(i)).getAttribute("data-score"))) {
-					System.out.println(
-							((HtmlDivision) page.getByXPath("//div[@data-score]").get(i)).getAttribute("data-score"));
-					System.out.println(((HtmlDivision) page.getByXPath("//div[@data-score]").get(i))
+				
+				if (5000 < Integer.parseInt(((HtmlDivision) page
+						.getByXPath("//div[@data-score]")
+						.get(i)).getAttribute("data-score"))) {
+					DataReddit redditData = new DataReddit();
+					//upvotes
+					redditData.setUpvote(((HtmlDivision) page.getByXPath("//div[@data-score]").get(i))
+							.getAttribute("data-score"));
+					//subreddit
+					redditData.setSubreddit(((HtmlDivision) page.getByXPath("//div[@data-score]").get(i))
 							.getAttribute("data-subreddit"));
-					System.out.println(((HtmlAnchor) page.getByXPath("//a[contains(@class, 'title may-blank')]").get(i))
+					//título da thread
+					redditData.setThreadTitle(((HtmlAnchor) page.getByXPath("//a[contains(@class, 'title may-blank')]").get(i))
 							.getTextContent());
-					System.out.println(((HtmlDivision) page.getByXPath("//div[@data-score]").get(i))
+					//link da thread
+					redditData.setLinkThread(((HtmlDivision) page.getByXPath("//div[@data-score]").get(i))
+							.getAttribute("data-url"));
+					//link para os comentários da thread
+					redditData.setLinkComments(redditUrl + ((HtmlDivision) page.getByXPath("//div[@data-score]").get(i))
 							.getAttribute("data-permalink"));
-					System.out.println(
-							((HtmlDivision) page.getByXPath("//div[@data-score]").get(i)).getAttribute("data-url"));
+
+					redditList.add(redditData);
 				}
 			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		return redditList;
 	}
 
 }

@@ -5,11 +5,18 @@ import org.telegram.telegrambots.api.objects.Update;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.exceptions.TelegramApiException;
 
+/**
+ * Class responsible for listen and response bot
+ * @author Jong.Lee
+ * @version 1.0
+ * @since 2017-11-11
+ */
 public class JongRedditBot  extends TelegramLongPollingBot{
 
     @Override
     public void onUpdateReceived(Update update) {
-
+    	RedditCollector reddit = new RedditCollector();
+    	
         if (update.hasMessage() && update.getMessage().hasText()) {
         	
             String message_text = update.getMessage().getText();
@@ -30,13 +37,10 @@ public class JongRedditBot  extends TelegramLongPollingBot{
             	String threads[];
             	threads = justThreads.split(";");
             	
-            	//Gerar e imprimir uma lista contendo número de upvotes, subreddit, título da thread, link para os comentários da thread, link da thread. 
-            	//Essa parte pode ser um CLI simples, desde que a formatação da impressão fique legível.
-            	//upvotes subreddit título link link
-            	
                 try {
                 	for (int i = 0; i < threads.length; i++) {
-                		execute(mountMessage(threads[i], chat_id));
+//                		reddit.collectData(threads[i]);
+                		execute(mountMessage(reddit.collectData(threads[i]).toString(), chat_id));                		
                 	} 
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
@@ -46,6 +50,11 @@ public class JongRedditBot  extends TelegramLongPollingBot{
             	SendMessage message = new SendMessage()
             			.setChatId(chat_id)
             			.setText("Try /NadaPraFaze programming;dogs;brazil");
+                try {
+                    execute(message);
+                } catch (TelegramApiException e) {
+                    e.printStackTrace();
+                }
             }
             else {
                 SendMessage message = new SendMessage()
