@@ -19,8 +19,8 @@ public class RedditCollector {
 		ArrayList<DataReddit> redditList = new ArrayList<>();
 		
 		try (final WebClient webClient = new WebClient()) {
-			String redditUrl = "https://www.reddit.com/";
-			String url = redditUrl + "r/" + subreddit;
+			String redditUrl = "https://www.reddit.com";
+			String url = redditUrl + "/r/" + subreddit;
 			
 			webClient.getOptions().setCssEnabled(false);//if you don't need css
 			webClient.getOptions().setJavaScriptEnabled(false);//if you don't need js

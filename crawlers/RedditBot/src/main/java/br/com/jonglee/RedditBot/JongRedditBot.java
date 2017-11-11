@@ -25,7 +25,10 @@ public class JongRedditBot  extends TelegramLongPollingBot{
             if (update.getMessage().getText().equals("/start")) {
                 SendMessage message = new SendMessage()
                         .setChatId(chat_id)
-                        .setText("You send /start");
+                        .setText("Bem vindo ao JongRedditBot, a minha função é fornecer "
+                        		+ "informações sobre as threads que "
+                        		+ "estão bombando(+ de 5000 votes) no momento em alguma subreddit."
+                        		+ "Segue uma demonstração para o uso: /NadaPraFaze programming;dogs;brazil");
                 try {
                     execute(message);
                 } catch (TelegramApiException e) {
@@ -40,7 +43,12 @@ public class JongRedditBot  extends TelegramLongPollingBot{
                 try {
                 	for (int i = 0; i < threads.length; i++) {
 //                		reddit.collectData(threads[i]);
-                		execute(mountMessage(reddit.collectData(threads[i]).toString(), chat_id));                		
+                		if(!reddit.collectData(threads[i]).isEmpty()) {
+                			execute(mountMessage(reddit.collectData(threads[i]).toString()
+                    				.replace("[", "").replace("]", "").replace(",", ""), chat_id)); 
+                		} else {
+                			execute(mountMessage("Nenhuma thread bombando em subreddit: " + threads[i], chat_id));
+                		}                		               		
                 	} 
                 } catch (TelegramApiException e) {
                     e.printStackTrace();
