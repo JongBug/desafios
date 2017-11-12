@@ -28,7 +28,8 @@ public class JongRedditBot  extends TelegramLongPollingBot{
                         .setText("Bem vindo ao JongRedditBot, a minha função é fornecer "
                         		+ "informações sobre as threads que "
                         		+ "estão bombando(+ de 5000 votes) no momento em alguma subreddit."
-                        		+ "Segue uma demonstração para o uso: /NadaPraFaze programming;dogs;brazil");
+                        		+ "\nPara o uso basta digitar o comando /NadaPraFazer (seguido do subreddit desejado)"
+                        		+ "\nEx: /NadaPraFazer programming;dogs;brazil");
                 try {
                     execute(message);
                 } catch (TelegramApiException e) {
@@ -54,10 +55,10 @@ public class JongRedditBot  extends TelegramLongPollingBot{
                     e.printStackTrace();
                 }
             }
-            else if (update.getMessage().getText().equals("/help")) {
+            else if (update.getMessage().getText().equals("/ajuda")) {
             	SendMessage message = new SendMessage()
             			.setChatId(chat_id)
-            			.setText("Try /NadaPraFaze programming;dogs;brazil");
+            			.setText("Coloque /NadaPraFazer (seguido do subreddit desejado)\nEx: /NadaPraFazer programming;dogs;brazil");
                 try {
                     execute(message);
                 } catch (TelegramApiException e) {
@@ -67,7 +68,7 @@ public class JongRedditBot  extends TelegramLongPollingBot{
             else {
                 SendMessage message = new SendMessage()
                         .setChatId(chat_id)
-                        .setText("Need /help?");
+                        .setText("Precisa de /ajuda?");
                 try {
                     execute(message);
                 } catch (TelegramApiException e) {
