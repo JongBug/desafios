@@ -15,8 +15,8 @@ java -version
 ```
 java -cp RedditBot.jar br.com.jonglee.RedditBot.App
 ```
-6- Filtrar e selecionar usuário bot @JongRedditBot pelo aplicativo Telegram
-7- Inicializar a conversa
+6- Filtrar e selecionar usuário bot @JongRedditBot pelo aplicativo Telegram</br>
+7- Inicializar a conversa</br>
 
 ### Descrição
 Parte do trabalho na IDwall inclui desenvolver *crawlers/scrapers* para coletar dados de websites.
