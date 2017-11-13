@@ -4,8 +4,8 @@
 Contato: jhl1254@gmail.com
 
 ### Etapas para inicialização
-1- Baixar o arquivo RedditBot.jar encontrado no diretório "desafios/crawlers/" </br>
-2- Abrir o prompt de comando no local aonde se encontra o arquivo RedditBot.jar baixado</br>
+1- Baixar o arquivo RedditApp.jar encontrado no diretório "desafios/crawlers/" </br>
+2- Abrir o prompt de comando no local aonde se encontra o arquivo RedditApp.jar baixado</br>
 3- Verificar a versão do java com o seguinte comando:
 ```
 java -version
@@ -13,10 +13,18 @@ java -version
 4- Caso o java não seja versão 1.8, é preciso instalar java 1.8</br>
 5- Executar o seguinte comando no prompt:
 ```
-java -cp RedditBot.jar br.com.jonglee.RedditBot.App
+java -cp RedditApp.jar br.com.jonglee.RedditBot.App
 ```
-6- Filtrar e selecionar usuário bot @JongRedditBot pelo aplicativo Telegram</br>
-7- Inicializar a conversa</br>
+#### Uso para parte 1
+6- Para parte 1 basta digitar a opção "1"</br>
+7- Inserir lista com nomes de subreddits separados por ponto-e-vírgula (;). Ex: "askreddit;worldnews;cats"</br>
+8- Aperte "0" para sair</br>
+
+#### Uso para parte 2
+6'- Para parte 2 basta digitar a opção "2"</br>
+7'- Filtrar e selecionar usuário bot @JongRedditBot pelo aplicativo Telegram</br>
+8'- Inicializar a conversa</br>
+9'- Aperte "ctrl+c" para sair</br>
 
 ### Descrição
 Parte do trabalho na IDwall inclui desenvolver *crawlers/scrapers* para coletar dados de websites.
