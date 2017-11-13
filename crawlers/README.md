@@ -1,5 +1,24 @@
 # Desafio 2: Crawlers
 
+## Jong Hwa Lee
+Contato: jhl1254@gmail.com
+
+### Etapas para inicialização
+1- Baixar o arquivo RedditBot.jar encontrado no diretório "desafios/crawlers/" </br>
+2- Abrir o prompt de comando no local aonde se encontra o arquivo RedditBot.jar baixado</br>
+3- Verificar a versão do java com o seguinte comando:
+```
+java -version
+```
+4- Caso o java não seja versão 1.8, é preciso instalar java 1.8</br>
+5- Executar o seguinte comando no prompt:
+```
+java -cp RedditBot.jar br.com.jonglee.RedditBot.App
+```
+6- Filtrar e selecionar usuário bot @JongRedditBot pelo aplicativo Telegram</br>
+7- Inicializar a conversa</br>
+
+### Descrição
 Parte do trabalho na IDwall inclui desenvolver *crawlers/scrapers* para coletar dados de websites.
 Como nós nos divertimos trabalhando, às vezes trabalhamos para nos divertir!
 
